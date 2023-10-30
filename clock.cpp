@@ -10,7 +10,7 @@ Clock::Clock(QWidget *parent) : QLCDNumber(parent)
     this->display(currentTime.toString("hh:mm:ss"));
     connect(timer, SIGNAL(timeout()), this, SLOT(on_timer()));
 
-
+    this->setStyleSheet("border: null;");
 
 }
 
@@ -28,4 +28,16 @@ void Clock::on_timer()
 {
     currentTime = QTime::currentTime();
     this->display(currentTime.toString("hh:mm:ss"));
+    if (currentTime.hour() == this->timeAlarm.hour() and
+            currentTime.minute() == this->timeAlarm.minute() and
+            currentTime.second() == this->timeAlarm.second())
+    {
+        emit alarm();
+
+    }
+}
+
+void Clock :: setAlarm(QTime time)
+{
+    this->timeAlarm = time;
 }

@@ -6,6 +6,7 @@
 #include <QTimer>
 #include <QTime>
 
+
 class Clock : public QLCDNumber
 {
     Q_OBJECT
@@ -16,14 +17,20 @@ public:
     void start();
     void stop();
     //get_time();
+    void setAlarm(QTime);
+
 private slots:
 
     void on_timer();
+
+signals:
+    void alarm();
 
 private:
 
     QTime currentTime;
     QTimer *timer;
+    QTime timeAlarm;
 };
 
 #endif // CLOCK_H
